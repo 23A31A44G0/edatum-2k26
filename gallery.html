@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Gallery — EDATUM 2k26 | STRIDES</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- AI Neural Network Visualization -->
+    <div class="ai-network"></div>
+    
+    <header class="site-header small">
+      <div class="container nav-row">
+  <div class="brand">EDATUM 2k26 | <span class="accent">STRIDES</span></div>
+  <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="gallery-nav">☰</button>
+  <nav id="gallery-nav" class="nav" role="navigation">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="events.html">Events</a>
+          <a href="gallery.html" class="active">Gallery</a>
+          <a href="coordinators.html">Coordinators</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      <h1>Gallery</h1>
+      <p>Highlights from previous editions — speakers, winners, and behind-the-scenes.</p>
+      <div class="gallery-grid" id="gallery-grid">
+        <!-- placeholder images -->
+        <img src="https://via.placeholder.com/400x260?text=Photo+1" alt="photo1" data-index="0" />
+        <img src="https://via.placeholder.com/400x260?text=Photo+2" alt="photo2" data-index="1" />
+        <img src="https://via.placeholder.com/400x260?text=Photo+3" alt="photo3" data-index="2" />
+        <img src="https://via.placeholder.com/400x260?text=Photo+4" alt="photo4" data-index="3" />
+      </div>
+
+      <!-- modal -->
+      <div id="lightbox" class="lightbox hidden">
+        <button class="close">×</button>
+        <img src="" alt="" />
+        <div class="caption"></div>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>© EDATUM 2k26 | STRIDES — Gallery</p>
+      </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+  </body>
+</html>
