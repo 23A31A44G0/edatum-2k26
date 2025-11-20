@@ -86,7 +86,7 @@ body::after {
   pointer-events: none;
 }
 
-/* Binary code layer */
+/* Binary code layer - Decorative only, not for screen readers */
 .binary-code {
   position: fixed;
   top: 0;
@@ -98,9 +98,11 @@ body::after {
   pointer-events: none;
   font-family: 'Courier New', monospace;
   font-size: 12px;
-  color: rgba(0, 224, 255, 0.12);
+  color: rgba(0, 224, 255, 0.08);
   line-height: 1.5;
   user-select: none;
+  opacity: 0.4;
+  /* Note: aria-hidden is an HTML attribute; set aria-hidden="true" on the element in HTML if needed */
 }
 
 .binary-code span {
@@ -352,6 +354,144 @@ body {
   }
 }
 
+/* ===== Animated Data Graphs Background ===== */
+.data-graphs {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.4;
+  overflow: hidden;
+}
+
+.graph-bar {
+  position: absolute;
+  bottom: 0;
+  width: 3%;
+  background: linear-gradient(to top, rgba(0, 224, 255, 0.6), rgba(0, 224, 255, 0.1));
+  border-radius: 4px 4px 0 0;
+  box-shadow: 0 0 10px rgba(0, 224, 255, 0.4);
+  animation: barGrowth 3s ease-in-out infinite;
+}
+
+.graph-bar:nth-child(1) { left: 5%; animation-duration: 2.5s; animation-delay: 0s; }
+.graph-bar:nth-child(2) { left: 12%; animation-duration: 3s; animation-delay: 0.3s; }
+.graph-bar:nth-child(3) { left: 19%; animation-duration: 2.8s; animation-delay: 0.6s; }
+.graph-bar:nth-child(4) { left: 26%; animation-duration: 3.2s; animation-delay: 0.9s; }
+.graph-bar:nth-child(5) { left: 33%; animation-duration: 2.7s; animation-delay: 1.2s; }
+.graph-bar:nth-child(6) { left: 40%; animation-duration: 3.1s; animation-delay: 1.5s; background: linear-gradient(to top, rgba(123, 47, 247, 0.6), rgba(123, 47, 247, 0.1)); box-shadow: 0 0 10px rgba(123, 47, 247, 0.4); }
+.graph-bar:nth-child(7) { left: 47%; animation-duration: 2.9s; animation-delay: 1.8s; background: linear-gradient(to top, rgba(123, 47, 247, 0.6), rgba(123, 47, 247, 0.1)); box-shadow: 0 0 10px rgba(123, 47, 247, 0.4); }
+.graph-bar:nth-child(8) { left: 54%; animation-duration: 3.3s; animation-delay: 2.1s; background: linear-gradient(to top, rgba(123, 47, 247, 0.6), rgba(123, 47, 247, 0.1)); box-shadow: 0 0 10px rgba(123, 47, 247, 0.4); }
+.graph-bar:nth-child(9) { left: 61%; animation-duration: 2.6s; animation-delay: 2.4s; background: linear-gradient(to top, rgba(0, 255, 163, 0.6), rgba(0, 255, 163, 0.1)); box-shadow: 0 0 10px rgba(0, 255, 163, 0.4); }
+.graph-bar:nth-child(10) { left: 68%; animation-duration: 3.4s; animation-delay: 2.7s; background: linear-gradient(to top, rgba(0, 255, 163, 0.6), rgba(0, 255, 163, 0.1)); box-shadow: 0 0 10px rgba(0, 255, 163, 0.4); }
+.graph-bar:nth-child(11) { left: 75%; animation-duration: 2.8s; animation-delay: 3s; background: linear-gradient(to top, rgba(0, 255, 163, 0.6), rgba(0, 255, 163, 0.1)); box-shadow: 0 0 10px rgba(0, 255, 163, 0.4); }
+.graph-bar:nth-child(12) { left: 82%; animation-duration: 3.1s; animation-delay: 3.3s; }
+.graph-bar:nth-child(13) { left: 89%; animation-duration: 2.9s; animation-delay: 3.6s; }
+.graph-bar:nth-child(14) { left: 95%; animation-duration: 3.2s; animation-delay: 3.9s; }
+
+@keyframes barGrowth {
+  0%, 100% {
+    height: 15%;
+    opacity: 0.6;
+  }
+  25% {
+    height: 35%;
+    opacity: 0.9;
+  }
+  50% {
+    height: 60%;
+    opacity: 1;
+  }
+  75% {
+    height: 25%;
+    opacity: 0.8;
+  }
+}
+
+.graph-line {
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(0, 224, 255, 0.6) 20%, 
+    rgba(123, 47, 247, 0.6) 50%, 
+    rgba(0, 255, 163, 0.6) 80%, 
+    transparent 100%);
+  top: 30%;
+  animation: lineWave 5s ease-in-out infinite;
+  clip-path: polygon(
+    0% 50%, 5% 45%, 10% 40%, 15% 35%, 20% 25%, 25% 20%, 30% 30%, 35% 35%, 
+    40% 40%, 45% 50%, 50% 55%, 55% 60%, 60% 50%, 65% 45%, 70% 35%, 75% 30%, 
+    80% 35%, 85% 45%, 90% 50%, 95% 55%, 100% 50%, 
+    100% 100%, 0% 100%
+  );
+}
+
+.graph-line:nth-child(16) {
+  top: 50%;
+  animation-delay: 1s;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(123, 47, 247, 0.5) 20%, 
+    rgba(0, 255, 163, 0.5) 50%, 
+    rgba(0, 224, 255, 0.5) 80%, 
+    transparent 100%);
+}
+
+.graph-line:nth-child(17) {
+  top: 70%;
+  animation-delay: 2s;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(0, 255, 163, 0.4) 20%, 
+    rgba(0, 224, 255, 0.4) 50%, 
+    rgba(123, 47, 247, 0.4) 80%, 
+    transparent 100%);
+}
+
+@keyframes lineWave {
+  0%, 100% {
+    transform: translateY(0) scaleY(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-10px) scaleY(1.2);
+    opacity: 1;
+  }
+}
+
+.graph-dot {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(0, 224, 255, 0.8);
+  box-shadow: 0 0 15px rgba(0, 224, 255, 0.6);
+  animation: dotPulse 2s ease-in-out infinite;
+}
+
+.graph-dot:nth-child(18) { left: 10%; top: 25%; animation-delay: 0s; }
+.graph-dot:nth-child(19) { left: 25%; top: 35%; animation-delay: 0.3s; background: rgba(123, 47, 247, 0.8); box-shadow: 0 0 15px rgba(123, 47, 247, 0.6); }
+.graph-dot:nth-child(20) { left: 40%; top: 45%; animation-delay: 0.6s; background: rgba(0, 255, 163, 0.8); box-shadow: 0 0 15px rgba(0, 255, 163, 0.6); }
+.graph-dot:nth-child(21) { left: 55%; top: 30%; animation-delay: 0.9s; }
+.graph-dot:nth-child(22) { left: 70%; top: 40%; animation-delay: 1.2s; background: rgba(123, 47, 247, 0.8); box-shadow: 0 0 15px rgba(123, 47, 247, 0.6); }
+.graph-dot:nth-child(23) { left: 85%; top: 50%; animation-delay: 1.5s; background: rgba(0, 255, 163, 0.8); box-shadow: 0 0 15px rgba(0, 255, 163, 0.6); }
+
+@keyframes dotPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 1;
+  }
+}
+
 /* ===== Container ===== */
 .container {
   width: 90%;
@@ -552,7 +692,7 @@ html {
 /* ===== Hero Section ===== */
 .hero {
   text-align: center;
-  padding: 2rem 1rem;
+  padding: 1rem 1rem;
 }
 
 .hero-ctas {
@@ -561,9 +701,14 @@ html {
   align-items: center;
   gap: 1rem;
   flex-wrap: wrap;
+  margin-top: 0.5rem;
 }
 
 /* ===== Main Content ===== */
+main {
+  padding: 2rem 0;
+}
+
 main h1 {
   text-align: center;
   font-size: 2.2rem;
@@ -579,6 +724,86 @@ main p {
   color: #c0c0c0;
 }
 
+/* Page Introduction Text */
+.page-intro {
+  background: rgba(26, 26, 64, 0.9);
+  color: #e8e8e8 !important;
+  padding: 1.5rem 2rem;
+  border-radius: 12px;
+  border-left: 4px solid #00e0ff;
+  margin: 2rem auto;
+  max-width: 800px;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+/* Content Card for About/Info Pages */
+.content-card {
+  background: rgba(26, 26, 64, 0.95);
+  border-radius: 18px;
+  padding: 3rem 2.5rem;
+  margin: 2rem auto;
+  max-width: 900px;
+  border: 2px solid rgba(0, 224, 255, 0.3);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5),
+              0 5px 20px rgba(0, 224, 255, 0.2);
+  backdrop-filter: blur(15px);
+}
+
+.content-card h1 {
+  color: #00e0ff;
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  text-shadow: 0 2px 10px rgba(0, 224, 255, 0.4);
+}
+
+.content-card .lead {
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: #e8e8e8;
+  text-align: center;
+  margin-bottom: 2.5rem;
+  padding-bottom: 2rem;
+  border-bottom: 2px solid rgba(0, 224, 255, 0.2);
+}
+
+.about-section {
+  margin: 2.5rem 0;
+  padding: 1.5rem;
+  background: rgba(13, 13, 43, 0.5);
+  border-radius: 12px;
+  border-left: 4px solid #00e0ff;
+  transition: all 0.3s ease;
+}
+
+.about-section:hover {
+  background: rgba(13, 13, 43, 0.7);
+  border-left-color: #00ffa3;
+  transform: translateX(5px);
+}
+
+.about-section h2 {
+  color: #00e0ff;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  text-transform: none;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.about-section p {
+  color: #e8e8e8;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  margin: 0;
+  text-align: left;
+}
+
 /* ===== Events Grid ===== */
 .events-grid {
   display: grid;
@@ -590,7 +815,7 @@ main p {
 
 /* ===== Event Cards (Listing) ===== */
 .events-grid .event-card {
-  background: rgba(26, 26, 64, 0.95);
+  background: rgba(26, 26, 64, 0.75);
   border-radius: 15px;
   padding: 1.8rem;
   border: 2px solid rgba(0, 224, 255, 0.3);
@@ -602,6 +827,7 @@ main p {
   display: flex;
   flex-direction: column;
   backdrop-filter: blur(10px);
+  overflow: hidden;
 }
 
 .events-grid .event-card::before {
@@ -616,6 +842,96 @@ main p {
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   pointer-events: none;
+  z-index: 1;
+}
+
+/* Rotating background element for each card */
+.events-grid .event-card::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200px;
+  height: 200px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  opacity: 0.15;
+  z-index: 0;
+  animation: cardRotate 20s linear infinite;
+}
+
+@keyframes cardRotate {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* Data Vishleshana - Quiz/Question marks pattern */
+#data-vishleshana::after {
+  background-image:
+    radial-gradient(circle at center, rgba(0, 224, 255, 0.4) 0%, transparent 50%),
+    radial-gradient(circle at 30% 30%, rgba(0, 224, 255, 0.3) 20px, transparent 20px),
+    radial-gradient(circle at 70% 70%, rgba(0, 224, 255, 0.3) 15px, transparent 15px),
+    radial-gradient(circle at 50% 80%, rgba(0, 224, 255, 0.2) 18px, transparent 18px);
+  background-size: 100% 100%, 80px 80px, 60px 60px, 70px 70px;
+  animation-duration: 15s;
+}
+
+/* Data Pravachan - Storytelling/Speech bubbles pattern */
+#data-pravachan::after {
+  background-image:
+    linear-gradient(45deg, rgba(123, 47, 247, 0.3) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(123, 47, 247, 0.3) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, rgba(123, 47, 247, 0.2) 75%),
+    linear-gradient(-45deg, transparent 75%, rgba(123, 47, 247, 0.2) 75%);
+  background-size: 60px 60px;
+  background-position: 0 0, 0 30px, 30px -30px, -30px 0px;
+  animation-duration: 25s;
+}
+
+/* Data Vatsalya - AI/Code brackets pattern */
+#data-vatsalya::after {
+  background-image:
+    repeating-linear-gradient(90deg, rgba(0, 255, 163, 0.3) 0px, rgba(0, 255, 163, 0.3) 10px, transparent 10px, transparent 20px),
+    repeating-linear-gradient(0deg, rgba(0, 255, 163, 0.2) 0px, rgba(0, 255, 163, 0.2) 10px, transparent 10px, transparent 20px),
+    radial-gradient(circle at center, rgba(0, 255, 163, 0.4) 0%, transparent 70%);
+  background-size: 100% 100%, 100% 100%, 150px 150px;
+  animation-duration: 18s;
+  animation-direction: reverse;
+}
+
+/* Data Samiksha - Project/Hexagon network pattern */
+#data-samiksha::after {
+  background-image:
+    linear-gradient(30deg, rgba(0, 224, 255, 0.3) 12%, transparent 12.5%, transparent 87%, rgba(0, 224, 255, 0.3) 87.5%),
+    linear-gradient(150deg, rgba(0, 224, 255, 0.3) 12%, transparent 12.5%, transparent 87%, rgba(0, 224, 255, 0.3) 87.5%),
+    linear-gradient(270deg, rgba(0, 224, 255, 0.2) 12%, transparent 12.5%, transparent 87%, rgba(0, 224, 255, 0.2) 87.5%);
+  background-size: 80px 140px;
+  background-position: 0 0, 0 0, 40px 70px;
+  animation-duration: 30s;
+}
+
+/* Data Anvaya - ML/Gear pattern */
+#data-anvaya::after {
+  background-image:
+    radial-gradient(circle at center, transparent 40%, rgba(123, 47, 247, 0.4) 40%, rgba(123, 47, 247, 0.4) 45%, transparent 45%),
+    radial-gradient(circle at 25% 25%, rgba(123, 47, 247, 0.3) 8px, transparent 8px),
+    radial-gradient(circle at 75% 75%, rgba(123, 47, 247, 0.3) 8px, transparent 8px),
+    radial-gradient(circle at 75% 25%, rgba(123, 47, 247, 0.2) 6px, transparent 6px),
+    radial-gradient(circle at 25% 75%, rgba(123, 47, 247, 0.2) 6px, transparent 6px);
+  background-size: 120px 120px, 80px 80px, 80px 80px, 60px 60px, 60px 60px;
+  animation-duration: 22s;
+}
+
+/* Ensure content stays above rotating background */
+.events-grid .event-card h3,
+.events-grid .event-card p,
+.events-grid .event-card .actions {
+  position: relative;
+  z-index: 2;
 }
 
 .events-grid .event-card:hover {
@@ -623,11 +939,17 @@ main p {
   box-shadow: 0 15px 35px rgba(0, 224, 255, 0.4), 
               0 5px 15px rgba(123, 47, 247, 0.3);
   border-color: rgba(0, 224, 255, 0.7);
+  background: rgba(26, 26, 64, 0.85);
 }
 
 .events-grid .event-card:hover::before {
   opacity: 1;
   animation: borderGlow 2s ease-in-out infinite;
+}
+
+.events-grid .event-card:hover::after {
+  opacity: 0.25;
+  animation-duration: 10s;
 }
 
 @keyframes borderGlow {
@@ -716,14 +1038,14 @@ main p {
 /* ===== Headings ===== */
 h1 {
   text-align: center;
-  font-size: 2.2rem;
-  margin-bottom: 0.8rem;
+  font-size: 1.5rem;
+  margin-bottom: 0.4rem;
   background: linear-gradient(90deg, #00e0ff, #7b2ff7, #00ffa3);
   background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  font-weight: 800;
+  font-weight: 1000;
   animation: gradientShift 4s ease-in-out infinite;
   text-shadow: 0 0 30px rgba(0, 224, 255, 0.5);
   letter-spacing: 1px;
@@ -741,10 +1063,10 @@ h1 {
 .lead {
   text-align: center;
   color: #d0d0d0;
-  font-size: 1.05rem;
-  margin-bottom: 1.2rem;
+  font-size: 0.85rem;
+  margin-bottom: 0.6rem;
   transition: color 0.3s ease;
-  line-height: 1.7;
+  line-height: 1.4;
 }
 
 h2 {
@@ -797,6 +1119,7 @@ h2:hover {
   line-height: 1.8;
   margin-bottom: 1.2rem;
   font-size: 1.05rem;
+  text-align: left;
 }
 
 /* List styling */
@@ -867,8 +1190,8 @@ h2:hover {
               filter 0.3s ease;
   cursor: pointer;
   background: linear-gradient(135deg, #1a1a40, #0d0d2b);
-  min-height: 400px;
-  object-fit: cover;
+ object-fit: contain;
+  display: block;
 }
 
 .event-poster img:hover {
@@ -886,7 +1209,7 @@ h2:hover {
 }
 
 .event-poster img[src*="poster.jpg"]::before {
-  content: "Event Poster\AComming Soon";
+  content: "Event Poster\AComing Soon";
   white-space: pre;
   position: absolute;
   color: #00e0ff;
@@ -981,6 +1304,36 @@ p {
               0 0 40px rgba(0, 224, 255, 0.3);
 }
 
+/* Primary Call-to-Action Button */
+.btn.primary-glow {
+  background: linear-gradient(135deg, #00e0ff, #7b2ff7, #00ffa3);
+  padding: 1rem 2.5rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  box-shadow: 0 6px 25px rgba(0, 224, 255, 0.5),
+              0 0 50px rgba(0, 224, 255, 0.3);
+  animation: pulseGlow 2s ease-in-out infinite;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.btn.primary-glow:hover {
+  background: linear-gradient(135deg, #00ffa3, #00e0ff, #7b2ff7);
+  transform: translateY(-5px) scale(1.08);
+  box-shadow: 0 12px 35px rgba(0, 224, 255, 0.7),
+              0 0 60px rgba(0, 224, 255, 0.5);
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 6px 25px rgba(0, 224, 255, 0.5),
+                0 0 50px rgba(0, 224, 255, 0.3);
+  }
+  50% {
+    box-shadow: 0 8px 30px rgba(0, 224, 255, 0.7),
+                0 0 60px rgba(0, 224, 255, 0.5);
+  }
+}
+
 .link {
   color: #00e0ff;
   font-weight: 600;
@@ -1023,55 +1376,292 @@ p {
 
 /* ===== Footer ===== */
 .site-footer {
-  background: rgba(13, 13, 43, 0.9);
+  background: rgba(13, 13, 43, 0.95);
+  padding: 3rem 0 1rem;
+  color: #c0c0c0;
+  border-top: 2px solid rgba(0, 224, 255, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+.footer-section h3 {
+  color: #00e0ff;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.footer-section p {
+  margin: 0.5rem 0;
+  line-height: 1.6;
+  color: #d0d0d0;
+}
+
+.footer-section a {
+  color: #00e0ff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-section a:hover {
+  color: #00ffa3;
+  text-decoration: underline;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li {
+  margin: 0.5rem 0;
+}
+
+.footer-links a {
+  color: #d0d0d0;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.footer-links a:hover {
+  color: #00e0ff;
+  transform: translateX(5px);
+}
+
+.social-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.social-links a {
+  color: #d0d0d0;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.social-links a:hover {
+  color: #00e0ff;
+  transform: translateX(5px);
+}
+
+.footer-bottom {
   text-align: center;
-  padding: 1rem 0;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(0, 224, 255, 0.2);
+  margin-top: 2rem;
+}
+
+.footer-bottom p {
+  margin: 0.5rem 0;
   font-size: 0.9rem;
   color: #888;
-  border-top: 1px solid rgba(0, 224, 255, 0.2);
+}
+
+.footer-credits {
+  font-size: 0.85rem !important;
+  color: #666 !important;
+}
+
+@media (max-width: 768px) {
+  .footer-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  
+  .social-links {
+    align-items: center;
+  }
+  
+  .footer-links a:hover,
+  .social-links a:hover {
+    transform: translateX(0) scale(1.05);
+  }
+}
+
+/* ===== Event Info Section ===== */
+.event-info {
+  padding: 1.5rem 1rem;
+  margin: 1rem auto;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.info-card {
+  background: rgba(26, 26, 64, 0.7);
+  border-radius: 10px;
+  padding: 1.2rem 1rem;
+  text-align: center;
+  border: 2px solid rgba(0, 224, 255, 0.3);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Routing lines background pattern for each card */
+.info-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    /* Horizontal routing lines */
+    linear-gradient(90deg, transparent 0%, rgba(0, 224, 255, 0.1) 25%, transparent 50%, rgba(123, 47, 247, 0.1) 75%, transparent 100%),
+    /* Vertical routing lines */
+    linear-gradient(0deg, transparent 0%, rgba(0, 255, 163, 0.1) 30%, transparent 60%),
+    /* Diagonal circuit paths */
+    linear-gradient(45deg, transparent 40%, rgba(0, 224, 255, 0.15) 45%, rgba(0, 224, 255, 0.15) 55%, transparent 60%),
+    linear-gradient(-45deg, transparent 40%, rgba(123, 47, 247, 0.15) 45%, rgba(123, 47, 247, 0.15) 55%, transparent 60%),
+    /* Circuit node dots */
+    radial-gradient(circle at 20% 30%, rgba(0, 224, 255, 0.3) 2px, transparent 2px),
+    radial-gradient(circle at 80% 70%, rgba(123, 47, 247, 0.3) 2px, transparent 2px),
+    radial-gradient(circle at 50% 50%, rgba(0, 255, 163, 0.3) 2px, transparent 2px),
+    radial-gradient(circle at 15% 80%, rgba(0, 224, 255, 0.25) 1.5px, transparent 1.5px),
+    radial-gradient(circle at 85% 25%, rgba(123, 47, 247, 0.25) 1.5px, transparent 1.5px);
+  background-size: 100% 100%, 100% 100%, 150% 150%, 150% 150%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
+  background-position: 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.6;
+}
+
+/* Add subtle animation to routing lines */
+.info-card::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent 30%, rgba(0, 224, 255, 0.05) 50%, transparent 70%);
+  animation: routingFlow 8s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes routingFlow {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  100% {
+    transform: translate(50%, 50%) rotate(360deg);
+  }
+}
+
+/* Ensure text content is above the routing background */
+.info-card h2,
+.info-card p {
+  position: relative;
+  z-index: 1;
+}
+
+.info-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(0, 224, 255, 0.6);
+  box-shadow: 0 12px 30px rgba(0, 224, 255, 0.3);
+  background: rgba(26, 26, 64, 0.85);
+}
+
+.info-card:hover::before {
+  opacity: 0.9;
+}
+
+.info-card:hover::after {
+  animation-duration: 4s;
+}
+
+.info-card h2 {
+  color: #00e0ff;
+  font-size: 1.1rem;
+  margin-bottom: 0.6rem;
+  text-transform: none;
+  letter-spacing: 0.5px;
+}
+
+.info-card p {
+  color: #e0e0e0;
+  margin: 0.3rem 0;
+  line-height: 1.5;
+  font-size: 0.95rem;
+}
+
+.info-card p strong {
+  color: #00ffa3;
+  font-size: 1rem;
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+@media (max-width: 768px) {
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ===== Poster Section ===== */
 .poster {
-  padding: 2rem 1rem;
+  padding: 3rem 1rem;
   text-align: center;
 }
 
 .poster figure {
   margin: 0 auto;
-  max-width: 600px;
+  max-width: 1000px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
 .poster img {
   width: 100%;
-  max-width: 500px;
+  max-width: 900px;
   height: auto;
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(123, 47, 247, 0.15);
+  border-radius: 15px;
+  box-shadow: 0 12px 35px rgba(123, 47, 247, 0.2),
+              0 5px 15px rgba(0, 224, 255, 0.15);
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
               box-shadow 0.5s cubic-bezier(0.4, 0, 0.2, 1),
               filter 0.3s ease;
-  border: 2px solid rgba(0, 224, 255, 0.2);
+  border: 3px solid rgba(0, 224, 255, 0.3);
 }
 
 .poster img:hover {
-  transform: scale(1.05) rotate(1deg);
-  box-shadow: 0 15px 40px rgba(123, 47, 247, 0.3),
-              0 0 60px rgba(0, 224, 255, 0.2);
+  transform: scale(1.03) rotate(0.5deg);
+  box-shadow: 0 20px 50px rgba(123, 47, 247, 0.4),
+              0 0 80px rgba(0, 224, 255, 0.3);
   filter: brightness(1.1);
-  border-color: rgba(0, 224, 255, 0.5);
+  border-color: rgba(0, 224, 255, 0.6);
 }
 
 .poster figcaption {
-  color: #888;
-  font-size: 0.9rem;
+  color: #999;
+  font-size: 1rem;
   font-style: italic;
   transition: color 0.3s ease;
+  max-width: 800px;
 }
 
 .poster figure:hover figcaption {
@@ -1128,11 +1718,20 @@ p {
   
   .events-grid {
     grid-template-columns: 1fr;
-    gap: 1.2rem;
+    gap: 1rem;
   }
   
   .events-grid .event-card {
-    padding: 1.5rem;
+    padding: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .events-grid .event-card h3 {
+    font-size: 1.2rem;
+  }
+  
+  .events-grid .event-card p {
+    font-size: 0.9rem;
   }
   
   .hero h1 {
@@ -1262,12 +1861,26 @@ p {
   
   /* Poster */
   .poster {
-    padding: 1.5rem 0.5rem;
+    padding: 2rem 1rem;
+  }
+  
+  .poster figure {
+    max-width: 100%;
   }
   
   .poster img {
     max-width: 100%;
-    border-radius: 8px;
+    border-radius: 10px;
+    border-width: 2px;
+  }
+  
+  .poster img:hover {
+    transform: scale(1.02);
+  }
+  
+  .poster figcaption {
+    font-size: 0.9rem;
+    padding: 0 1rem;
   }
   
   /* Coordinator Cards */
@@ -1346,6 +1959,160 @@ p {
   .poster-note {
     font-size: 0.75rem;
     margin-top: 0.6rem;
+  }
+}
+
+/* ===== Mobile Performance Optimizations ===== */
+@media (max-width: 768px) {
+  /* Disable heavy background animations on mobile */
+  body::before {
+    animation: none;
+    opacity: 0.2;
+    filter: blur(80px);
+    will-change: auto;
+  }
+  
+  body::after {
+    animation: none;
+    opacity: 0.3;
+    will-change: auto;
+  }
+  
+  /* Remove will-change from all elements for mobile performance */
+  * {
+    will-change: auto !important;
+  }
+  
+  /* Simplify particle animations */
+  .data-particles span {
+    animation-duration: 20s !important;
+    opacity: 0.4;
+  }
+  
+  /* Hide some particles on mobile - keep only first 8 */
+  .data-particles span:nth-child(n+9) {
+    display: none;
+  }
+  
+  /* Hide binary code on mobile for performance */
+  .binary-code {
+    display: none;
+  }
+  
+  /* Hide AI network on mobile */
+  .ai-network {
+    display: none;
+  }
+  
+  /* Hide data graphs on mobile for performance */
+  .data-graphs {
+    display: none;
+  }
+  
+  /* Disable neural network animation */
+  .data-particles::before {
+    animation: none;
+    opacity: 0.2;
+  }
+  
+  /* Disable data streams on mobile */
+  .data-particles::after {
+    animation: none;
+    opacity: 0.2;
+  }
+  
+  /* Simplify button animations */
+  .btn {
+    transition: all 0.2s ease;
+  }
+  
+  .btn:hover::before {
+    display: none;
+  }
+  
+  /* Reduce card animations */
+  .event-card,
+  .events-grid .event-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    background: rgba(26, 26, 64, 0.98) !important;
+    backdrop-filter: none !important;
+    overflow: visible;
+  }
+  
+  .event-card:hover,
+  .events-grid .event-card:hover {
+    transform: none;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  }
+  
+  /* Completely hide rotating elements on event cards for mobile */
+  .events-grid .event-card::after {
+    display: none !important;
+  }
+  
+  /* Disable border gradient animation on event cards */
+  .events-grid .event-card::before {
+    animation: none !important;
+    opacity: 0.5;
+  }
+  
+  /* Disable routing animations on info cards for mobile */
+  .info-card::after {
+    animation: none;
+    display: none;
+  }
+  
+  .info-card {
+    background: rgba(26, 26, 64, 0.95);
+  }
+  
+  .info-card::before {
+    opacity: 0.4;
+  }
+  
+  /* Disable gradient animations */
+  h1 {
+    animation: none;
+    background: #00e0ff;
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+  
+  /* Simplify hover effects */
+  .link::before,
+  .btn::before {
+    display: none;
+  }
+  
+  /* Disable border glow animation */
+  @keyframes borderGlow {
+    0%, 100% {
+      opacity: 0.8;
+    }
+  }
+  
+  /* Disable pulse animation on CTA */
+  .btn.primary-glow {
+    animation: none;
+  }
+  
+  /* Simplify scroll reveal */
+  .scroll-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  
+  .scroll-reveal.revealed {
+    animation: none !important;
+  }
+  
+  /* Disable backdrop filter on older mobile devices */
+  .event-card,
+  .content-card,
+  .info-card {
+    backdrop-filter: none;
+    background: rgba(26, 26, 64, 0.98);
   }
 }
 
@@ -1439,3 +2206,7 @@ p {
   color: #00e0ff;
   text-decoration: underline;
 }
+
+
+
+
